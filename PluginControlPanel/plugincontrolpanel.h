@@ -3,23 +3,31 @@
 
 #include "plugincontrolpanel_global.h"
 #include <QDebug>
+#include "netserver.h"
+#include "comtranslator.h"
 
 class PluginControlPanel : public SHPlugin
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "SmartHouse/SHPlugin/1.0")
 	Q_INTERFACES(SHPlugin)
-	Q_PLUGIN_METADATA(IID "SmartHouse/SHPlugin/1.0" FILE "myplugin.json")
+
 public:
 	PluginControlPanel(QObject *parent = 0) : SHPlugin(parent) {}
-	~PluginControlPanel(){}
+	virtual ~PluginControlPanel(){}
 
-	virtual QString getVersion() const;
-	virtual QString getName() const;
+	virtual QString getVersion();
+	virtual QString getName();
 
 	virtual bool setControlInterface(PluginInterface * plugInterface);
 
 	virtual int start();
 	virtual int stop();
+
+private:
+	PluginInterface * plgInterface;
+	ComTranslator * translator;
+	NetServer * nServ;
 };
 
 #endif // PLUGINCONTROLPANEL_H
