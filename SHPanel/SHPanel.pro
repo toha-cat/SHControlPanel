@@ -1,11 +1,17 @@
+QT += qml quick
+
 TEMPLATE = app
 
-QT += qml quick
+TARGET = SHPanel
+
 CONFIG += c++11
 
 SOURCES += main.cpp \
     client.cpp \
-    comtranslator.cpp
+    comtranslator.cpp \
+    devicelisst.cpp \
+    window.cpp \
+    deviceitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,5 +23,8 @@ include(deployment.pri)
 
 HEADERS += \
     client.h \
-    comtranslator.h
+    comtranslator.h \
+    devicelisst.h \
+    window.h \
+    deviceitem.h
 

@@ -188,4 +188,5 @@ void ComTranslator::executeCom(QByteArray mess)
 		// error
 		break;
 	}
+	//TODO: ответ то отправить нужно
 }

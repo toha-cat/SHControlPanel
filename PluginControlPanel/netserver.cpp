@@ -35,7 +35,8 @@ void NetServer::incomingConnection(int socketfd)
 
 void NetServer::sendMessToClient(QTcpSocket *client, QByteArray mess, qint32 len)
 {
-	client->write(len, MESS_HEADER_SIZE);
+	QByteArray l(reinterpret_cast<char*>(&len), sizeof(qint32));
+	client->write(l, MESS_HEADER_SIZE);
 	client->write(mess.data(), len);
 }
 
@@ -65,6 +66,7 @@ void NetServer::readyReadLogin()
 
 void NetServer::readyRead()
 {
+	//TODO: переделать как в клиенте
 	QTcpSocket *client = (QTcpSocket*)sender();
 	int expected = messSize[client];
 	qint64 countByte = client->bytesAvailable();
@@ -85,7 +87,8 @@ void NetServer::readyRead()
 		}
 
 		QByteArray mess = client->read(expected);
-		emit valueChanged(value);
+		//emit valueChanged(value);
+		messSize[client] = 0;
 		QByteArray req = translator->executeComReq(mess);
 		sendMessToClient(client, req, req.length());
 	}

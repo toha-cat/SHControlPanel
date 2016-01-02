@@ -76,6 +76,8 @@ signals:
 	void reqAddRule(int key, int id, MessBoxRuleFull box);
 	void alertMess(QString mess);
 
+	void sendMess(QByteArray mess);
+
 public slots:
 	void translateMess(QByteArray mess);
 

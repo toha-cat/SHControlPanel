@@ -4,14 +4,15 @@
 #
 #-------------------------------------------------
 
-QT       += network sql
+QT       += core network sql
 
 QT       -= gui
 
 TARGET = PluginControlPanel
 TEMPLATE = lib
 
-CONFIG += plugin
+CONFIG += plugin \
+			c++11
 
 DEFINES += PLUGINCONTROLPANEL_LIBRARY
 

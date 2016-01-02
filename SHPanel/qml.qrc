@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>ListControls.qml</file>
+        <file>ControlLed.qml</file>
     </qresource>
 </RCC>
-
