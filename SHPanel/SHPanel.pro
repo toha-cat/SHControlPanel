@@ -9,9 +9,11 @@ CONFIG += c++11
 SOURCES += main.cpp \
     client.cpp \
     comtranslator.cpp \
-    devicelisst.cpp \
-    window.cpp \
-    deviceitem.cpp
+    deviceitem.cpp \
+    deviceman.cpp \
+    app.cpp \
+    uibackend.cpp \
+    categoryitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,7 +26,11 @@ include(deployment.pri)
 HEADERS += \
     client.h \
     comtranslator.h \
-    devicelisst.h \
-    window.h \
-    deviceitem.h
+    deviceitem.h \
+    deviceman.h \
+    containers.h \
+    app.h \
+    uibackend.h \
+    protocol.h \
+    categoryitem.h
 

@@ -1,11 +1,13 @@
-#include "window.h"
+#include <QObject>
+#include "app.h"
+
 
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
 
-	Window *win = new Window();
-	win->show();
+	App * myApp = new App();
+	myApp->start();
 
 	return app.exec();
 }
