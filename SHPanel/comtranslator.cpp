@@ -1,90 +1,56 @@
 #include "comtranslator.h"
 
-inline QDataStream &operator <<(QDataStream &stream,const MessBoxDev &sC) // сериализуем;
-{
-	stream << sC.id;
-	stream << sC.state;
-	stream << sC.key;
-	return stream;
-}
+//TODO: В запросах, где передается только id отсылать только id, а не всю структуру
 
-inline QDataStream &operator >>(QDataStream &stream, MessBoxDev &sC) // десериализуем;
-{
-	stream >> sC.id;
-	stream >> sC.state;
-	stream >> sC.key;
-	return stream;
-}
-
-
-inline QDataStream &operator <<(QDataStream &stream,const MessBoxDevFull &sC) // сериализуем;
+inline QDataStream &operator <<(QDataStream &stream,const BoxDev &sC) // сериализуем;
 {
 	stream << sC.id;
 	stream << sC.state;
 	stream << sC.name;
 	stream << sC.type;
 	stream << sC.param;
-	stream << sC.key;
+	stream << sC.cid;
 	return stream;
 }
 
-inline QDataStream &operator >>(QDataStream &stream, MessBoxDevFull &sC) // десериализуем;
+inline QDataStream &operator >>(QDataStream &stream, BoxDev &sC) // десериализуем;
 {
 	stream >> sC.id;
 	stream >> sC.state;
 	stream >> sC.name;
 	stream >> sC.type;
 	stream >> sC.param;
-	stream >> sC.key;
+	stream >> sC.cid;
 	return stream;
 }
 
-inline QDataStream &operator <<(QDataStream &stream,const MessBoxRule &sC) // сериализуем;
-{
-	stream << sC.id;
-	stream << sC.state;
-	stream << sC.name;
-	stream << sC.key;
-	return stream;
-}
-
-inline QDataStream &operator >>(QDataStream &stream, MessBoxRule &sC) // десериализуем;
-{
-	stream >> sC.id;
-	stream >> sC.state;
-	stream >> sC.name;
-	stream >> sC.key;
-	return stream;
-}
-
-
-inline QDataStream &operator <<(QDataStream &stream,const MessBoxRuleFull &sC) // сериализуем;
+inline QDataStream &operator <<(QDataStream &stream,const BoxRule &sC) // сериализуем;
 {
 	stream << sC.id;
 	stream << sC.state;
 	stream << sC.name;
 	stream << sC.text;
-	stream << sC.key;
+	stream << sC.cid;
 	return stream;
 }
 
-inline QDataStream &operator >>(QDataStream &stream, MessBoxRuleFull &sC) // десериализуем;
+inline QDataStream &operator >>(QDataStream &stream, BoxRule &sC) // десериализуем;
 {
 	stream >> sC.id;
 	stream >> sC.state;
 	stream >> sC.name;
 	stream >> sC.text;
-	stream >> sC.key;
+	stream >> sC.cid;
 	return stream;
 }
 
-inline QDataStream &operator <<(QDataStream &stream,const MessBoxAlert &sC) // сериализуем;
+inline QDataStream &operator <<(QDataStream &stream,const BoxAlert &sC) // сериализуем;
 {
 	stream << sC.text;
 	return stream;
 }
 
-inline QDataStream &operator >>(QDataStream &stream, MessBoxAlert &sC) // десериализуем;
+inline QDataStream &operator >>(QDataStream &stream, BoxAlert &sC) // десериализуем;
 {
 	stream >> sC.text;
 	return stream;
@@ -98,36 +64,66 @@ ComTranslator::ComTranslator(QObject *parent) : QObject(parent)
 
 void ComTranslator::translateMess(QByteArray mess)
 {
-	int type = (int)mess.at(0);
-	QByteArray data = mess.right(mess.length()-1);
-	QDataStream inStream(data);
+	qint8 type;
+	QDataStream inStream(mess);
+	inStream >> type;
 	switch (type) {
 		case MESS_TYPE_READ_DEV:{
-			MessBoxDev box;
+			BoxDev box;
 			inStream >> box;
-			emit reqReadDev(box.key, box.id, box.state);
+			emit reqReadDev(box.id, box.state);
 			break;
 		}
 		case MESS_TYPE_WRITE_DEV:{
-			MessBoxDev box;
+			BoxDev box;
 			inStream >> box;
-			emit reqWriteDev(box.key, box.id, box.state);
+			emit reqWriteDev(box.id, box.state);
+			break;
+		}
+		case MESS_TYPE_GET_LIST_DEV:{
+			LIST_LEN count;
+			inStream >> count;
+			QList<BoxDev> list;
+			for (int i = 0; i < count; ++i) {
+				BoxDev box;
+				inStream >> box;
+				list.append(box);
+			}
+			//TODO: реализовать категории устройств
+			emit reqGetDevList(0, list);
+		}
+		case MESS_TYPE_ADD_DEV:{
+			BoxDev box;
+			inStream >> box;
+			emit reqAddDev(box);
 			break;
 		}
 		case MESS_TYPE_GET_RULE:{
-			MessBoxRuleFull box;
+			BoxRule box;
 			inStream >> box;
-			emit reqGetRule(box.key, box.id, box);
+			emit reqGetRule(box);
 			break;
 		}
 		case MESS_TYPE_ADD_RULE:{
-			MessBoxRuleFull box;
+			BoxRule box;
 			inStream >> box;
-			emit reqAddRule(box.key, box.id, box);
+			emit reqAddRule(box);
 			break;
 		}
+		case MESS_TYPE_GET_LIST_RULE:{
+			LIST_LEN count;
+			inStream >> count;
+			QList<BoxRule> list;
+			for (int i = 0; i < count; ++i) {
+				BoxRule box;
+				inStream >> box;
+				list.append(box);
+			}
+			//TODO: реализовать категории правил
+			emit reqGetRuleList(0, list);
+		}
 		case MESS_TYPE_ALERT:{
-			MessBoxAlert box;
+			BoxAlert box;
 			inStream >> box;
 			emit alertMess(box.text);
 			break;
@@ -139,11 +135,10 @@ void ComTranslator::translateMess(QByteArray mess)
 	}
 }
 
-void ComTranslator::readDev(int key, int id)
+void ComTranslator::readDev(int id)
 {
-	MessBoxDev dev;
+	BoxDev dev;
 	dev.id = id;
-	dev.key = key;
 	QByteArray out;
 	QDataStream outStream(&out, QIODevice::WriteOnly);
 	outStream << MESS_TYPE_READ_DEV;
@@ -151,11 +146,10 @@ void ComTranslator::readDev(int key, int id)
 	emit sendMess(out);
 }
 
-void ComTranslator::writeDev(int key, int id, int state)
+void ComTranslator::writeDev(int id, int state)
 {
-	MessBoxDev dev;
+	BoxDev dev;
 	dev.id = id;
-	dev.key = key;
 	dev.state = state;
 	QByteArray out;
 	QDataStream outStream(&out, QIODevice::WriteOnly);
@@ -164,21 +158,46 @@ void ComTranslator::writeDev(int key, int id, int state)
 	emit sendMess(out);
 }
 
-void ComTranslator::getDevList(int key, int cid)
+void ComTranslator::addDev(int cid, QString name, QString type, QString param)
 {
-
+	BoxDev dev;
+	dev.cid = cid;
+	dev.name = name;
+	dev.type = type;
+	dev.param = param;
+	QByteArray out;
+	QDataStream outStream(&out, QIODevice::WriteOnly);
+	outStream << MESS_TYPE_ADD_DEV;
+	outStream << dev;
+	emit sendMess(out);
 }
 
-void ComTranslator::getRuleList(int key, int cid)
+void ComTranslator::getDevList(int cid)
 {
-
+	BoxDev dev;
+	dev.cid = cid;
+	QByteArray out;
+	QDataStream outStream(&out, QIODevice::WriteOnly);
+	outStream << MESS_TYPE_GET_LIST_DEV;
+	outStream << dev;
+	emit sendMess(out);
 }
 
-void ComTranslator::getRule(int key, int id)
+void ComTranslator::getRuleList(int cid)
 {
-	MessBoxRule rule;
+	BoxRule rule;
+	rule.cid = cid;
+	QByteArray out;
+	QDataStream outStream(&out, QIODevice::WriteOnly);
+	outStream << MESS_TYPE_GET_LIST_RULE;
+	outStream << rule;
+	emit sendMess(out);
+}
+
+void ComTranslator::getRule(int id)
+{
+	BoxRule rule;
 	rule.id = id;
-	rule.key = key;
 	QByteArray out;
 	QDataStream outStream(&out, QIODevice::WriteOnly);
 	outStream << MESS_TYPE_READ_DEV;
@@ -186,9 +205,18 @@ void ComTranslator::getRule(int key, int id)
 	emit sendMess(out);
 }
 
-void ComTranslator::addRule(int key, int cid, QString name, QString text, int state)
+void ComTranslator::addRule(int cid, QString name, QString text, int state)
 {
-
+	BoxRule rule;
+	rule.name = name;
+	rule.state = state;
+	rule.text = text;
+	rule.cid = cid;
+	QByteArray out;
+	QDataStream outStream(&out, QIODevice::WriteOnly);
+	outStream << MESS_TYPE_ADD_RULE;
+	outStream << rule;
+	emit sendMess(out);
 }
 
 
