@@ -89,8 +89,7 @@ void ComTranslator::translateMess(QByteArray mess)
 				inStream >> box;
 				list.append(box);
 			}
-			//TODO: реализовать категории устройств
-			emit reqGetDevList(0, list);
+            emit reqGetDevList(list);
 		}
 		case MESS_TYPE_ADD_DEV:{
 			BoxDev box;
@@ -119,8 +118,7 @@ void ComTranslator::translateMess(QByteArray mess)
 				inStream >> box;
 				list.append(box);
 			}
-			//TODO: реализовать категории правил
-			emit reqGetRuleList(0, list);
+            emit reqGetRuleList(list);
 		}
 		case MESS_TYPE_ALERT:{
 			BoxAlert box;

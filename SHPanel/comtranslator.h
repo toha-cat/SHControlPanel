@@ -26,8 +26,9 @@ signals:
 	void reqReadDev(int id, QString state);
 	void reqWriteDev(int id, QString state);
 	void reqAddDev(BoxDev dev);
-	void reqGetDevList(int cid, QList<BoxDev> list);
-	void reqGetRuleList(int cid, QList<BoxRule> list);
+    void reqGetDevList(BoxListDev list);
+    void reqGetCatList(BoxListCategory list);
+    void reqGetRuleList(BoxListRule list);
 	void reqGetRule(BoxRule box);
 	void reqAddRule(BoxRule box);
 	void alertMess(QString mess);
