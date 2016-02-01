@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     deviceman.cpp \
     app.cpp \
     uibackend.cpp \
-    categoryitem.cpp
+    categoryitem.cpp \
+    categoryman.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,5 +33,6 @@ HEADERS += \
     app.h \
     uibackend.h \
     protocol.h \
-    categoryitem.h
+    categoryitem.h \
+    categoryman.h
 
