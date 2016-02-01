@@ -5,6 +5,11 @@ DeviceMan::DeviceMan(QObject *QMLObject) : QObject(QMLObject)
 
 }
 
+const QList<DeviceItem *> DeviceMan::getList()
+{
+    return deviceList;
+}
+
 void DeviceMan::addDevice(int id, QString name, QString type, QString state, int cid = 0)
 {
     DeviceItem *dev = new DeviceItem(id, name, type, state, cid, this);

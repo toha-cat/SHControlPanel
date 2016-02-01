@@ -13,7 +13,7 @@ class DeviceMan : public QObject
 	Q_OBJECT
 public:
     explicit DeviceMan(QObject *QMLObject = 0);
-    QList<DeviceItem> getList();
+    const QList<DeviceItem *> getList();
 
 signals:
 

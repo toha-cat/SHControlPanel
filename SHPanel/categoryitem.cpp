@@ -1,8 +1,9 @@
 #include "categoryitem.h"
 
-CategoryItem::CategoryItem(QObject *parent) : QObject(parent)
+CategoryItem::CategoryItem(BoxCategory bcat, QObject *parent) : QObject(parent)
 {
-
+    setCid(bcat.cid);
+    setName(bcat.name);
 }
 
 int CategoryItem::cid() const
