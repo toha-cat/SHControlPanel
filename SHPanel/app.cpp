@@ -14,24 +14,26 @@ void App::start()
 	comTranslator = new ComTranslator(this);
 
 	devMan = new DeviceMan(this);
+    connect(comTranslator, &ComTranslator::reqGetDevList, devMan, &DeviceMan::setDeviceList);
 
-    //connect(comTranslator, &ComTranslator::sendMess, devMan, &DeviceMan::send);
+    catMan = new CategoryMan(this);
+    connect(comTranslator, &ComTranslator::reqGetCatList, catMan, &CategoryMan::setCategoryList);
 
 	ui = new UiBackend(this);
 	ui->createUi();
 
-    QList<QObject*> dataList;
-    dataList.append(new DeviceItem(0, "Item 1", "ControlLed", "On", 1));
+    QList<QObject*> devList = devMan->getList();
+    /*dataList.append(new DeviceItem(0, "Item 1", "ControlLed", "On", 1));
     dataList.append(new DeviceItem(1, "Item 2", "ControlLed", "On", 1));
     dataList.append(new DeviceItem(2, "Item 3", "ControlLed", "On", 2));
-    dataList.append(new DeviceItem(3, "Item 4", "ControlLed", "On", 2));
-    ui->setDeviceModel(dataList);
+    dataList.append(new DeviceItem(3, "Item 4", "ControlLed", "On", 2));*/
+    ui->setDeviceModel(devList);
 
-    QList<QObject*> catList;
-    catList.append(new DeviceItem(0, "Item 1", "ControlLed", "On"));
+    QList<QObject*> catList = catMan->getList();
+    /*catList.append(new DeviceItem(0, "Item 1", "ControlLed", "On"));
     catList.append(new DeviceItem(1, "Item 2", "ControlLed", "On"));
     catList.append(new DeviceItem(2, "Item 3", "ControlLed", "On"));
-    catList.append(new DeviceItem(3, "Item 4", "ControlLed", "On"));
+    catList.append(new DeviceItem(3, "Item 4", "ControlLed", "On"));*/
     ui->setDeviceModel(catList);
 
 	ui->show();

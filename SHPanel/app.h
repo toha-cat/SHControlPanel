@@ -6,6 +6,7 @@
 #include "comtranslator.h"
 #include "uibackend.h"
 #include "deviceman.h"
+#include "categoryman.h"
 
 class App : public QObject
 {
@@ -25,6 +26,7 @@ private:
 	ComTranslator *comTranslator;
 	UiBackend *ui;
 	DeviceMan *devMan;
+    CategoryMan *catMan;
 };
 
 #endif // APP_H
