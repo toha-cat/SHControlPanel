@@ -10,16 +10,16 @@ class CategoryMan : public QObject
     Q_OBJECT
 public:
     explicit CategoryMan(QObject *parent = 0);
-    const QList<CategoryItem *> getList();
+    const QList<QObject *> getList();
 
 signals:
 
 public slots:
-    void addCategory(BoxCategory cat);
+    void addCategory(BoxCategory bcat);
     void setCategoryList(BoxListCategory list);
 
 private:
-    QList<DeviceItem*> catList;
+    QList<QObject*> catList;
 };
 
 #endif // CATEGORYMAN_H

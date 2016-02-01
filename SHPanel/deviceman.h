@@ -13,7 +13,7 @@ class DeviceMan : public QObject
 	Q_OBJECT
 public:
     explicit DeviceMan(QObject *QMLObject = 0);
-    const QList<DeviceItem *> getList();
+    const QList<QObject *> getList();
 
 signals:
 
@@ -24,7 +24,7 @@ public slots:
 
 private:
     int currentCat = 0;
-	QList<DeviceItem*> deviceList;
+    QList<QObject*> deviceList;
 	QMap<int, DeviceItem*> deviceMap;
 
     void updateList();

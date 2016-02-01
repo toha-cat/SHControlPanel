@@ -5,7 +5,7 @@ DeviceMan::DeviceMan(QObject *QMLObject) : QObject(QMLObject)
 
 }
 
-const QList<DeviceItem *> DeviceMan::getList()
+const QList<QObject *> DeviceMan::getList()
 {
     return deviceList;
 }

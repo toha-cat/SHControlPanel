@@ -5,14 +5,14 @@ CategoryMan::CategoryMan(QObject *parent) : QObject(parent)
 
 }
 
-const QList<CategoryItem *> CategoryMan::getList()
+const QList<QObject *> CategoryMan::getList()
 {
     return catList;
 }
 
-void CategoryMan::addCategory(BoxCategory cat)
+void CategoryMan::addCategory(BoxCategory bcat)
 {
-    CategoryItem * cat = new CategoryItem(cat, this);
+    CategoryItem * cat = new CategoryItem(bcat, this);
     catList.append(cat);
 }
 

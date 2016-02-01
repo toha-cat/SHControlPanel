@@ -12,7 +12,7 @@ class CategoryItem : public QObject
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
 public:
-    explicit CategoryItem(QObject *parent = 0);
+    explicit CategoryItem(BoxCategory bcat, QObject *parent = 0);
     int cid() const;
     QString name() const;
 
