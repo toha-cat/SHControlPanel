@@ -24,7 +24,7 @@ void UiBackend::setDeviceCatModel(QList<QObject *> list)
 
 void UiBackend::show()
 {
-	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 	viewer = engine.rootObjects()[0];
 }
 
