@@ -6,6 +6,12 @@ CategoryItem::CategoryItem(BoxCategory bcat, QObject *parent) : QObject(parent)
     setName(bcat.name);
 }
 
+CategoryItem::CategoryItem(int cid, QString name, QObject *parent) : QObject(parent)
+{
+    setCid(cid);
+    setName(name);
+}
+
 int CategoryItem::cid() const
 {
     return m_cid;

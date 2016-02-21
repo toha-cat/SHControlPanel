@@ -14,6 +14,14 @@ void CategoryMan::addCategory(BoxCategory bcat)
 {
     CategoryItem * cat = new CategoryItem(bcat, this);
     catList.append(cat);
+    emit listChanged(catList);
+}
+
+void CategoryMan::addCategory(int cid, QString name)
+{
+    CategoryItem * cat = new CategoryItem(cid, name, this);
+    catList.append(cat);
+    emit listChanged(catList);
 }
 
 void CategoryMan::setCategoryList(BoxListCategory list)
@@ -22,4 +30,5 @@ void CategoryMan::setCategoryList(BoxListCategory list)
     foreach (BoxCategory cat, list) {
         addCategory(cat);
     }
+    emit listChanged(catList);
 }

@@ -3,24 +3,6 @@ import QtQuick 2.5
 Item {
     //property var isCurrent: (currentIndex == model.index)
 
-    function getAlteredState(){
-        if(model.state == "on"){
-            return "off";
-        }
-        else{
-            return "on";
-        }
-    }
-
-    function getStateImages(){
-        if(model.state == "on"){
-            return "qrc:/images/color/light_on.png";
-        }
-        else{
-            return "qrc:/images/color/light_off.png";
-        }
-    }
-
     height: cellHeight
     width: cellWidth
 
@@ -34,18 +16,38 @@ Item {
         radius: 10*dp
         color: "#eee"
 
-        Image {
-            id: img
-            fillMode: Image.PreserveAspectFit
-            source: getStateImages()
+        Row {
+            id: stateBox
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height*7/10
+
+            Text {
+                id: temperatura
+                text: model.state
+                height: parent.height;
+                width: parent.width / 2
+
+                horizontalAlignment: Text.AlignRight
+                verticalAlignment: Text.AlignVCenter
+                renderType: Text.NativeRendering
+                font.pointSize: 28*dp
+                wrapMode: Text.WordWrap
+
+            }
+
+            Image {
+                id: temprIco
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/images/color/thermometer.png"
+                height: parent.height
+                width: parent.width / 2
+            }
         }
 
         Text {
-            anchors.top: img.bottom
+            anchors.top: stateBox.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
@@ -60,7 +62,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                backend.changeDevice(model.id, getAlteredState());
+
             }
         }
     }

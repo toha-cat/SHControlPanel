@@ -13,9 +13,11 @@ public:
     const QList<QObject *> getList();
 
 signals:
+    void listChanged(QList<QObject*> list);
 
 public slots:
     void addCategory(BoxCategory bcat);
+    void addCategory(int cid, QString name);
     void setCategoryList(BoxListCategory list);
 
 private:

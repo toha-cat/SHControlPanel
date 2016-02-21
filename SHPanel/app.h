@@ -7,6 +7,7 @@
 #include "uibackend.h"
 #include "deviceman.h"
 #include "categoryman.h"
+#include "ruleman.h"
 
 class App : public QObject
 {
@@ -16,6 +17,7 @@ public:
 	void start();
 
 signals:
+    void viewLoginForm();
 
 public slots:
 	void clientConnected();
@@ -27,6 +29,12 @@ private:
 	UiBackend *ui;
 	DeviceMan *devMan;
     CategoryMan *catMan;
+    RuleMan * ruleMan;
+
+    void initComponents();
+    void configUi();
+    void connectComponents();
+    void loadDemoData();
 };
 
 #endif // APP_H

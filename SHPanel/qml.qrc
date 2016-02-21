@@ -1,9 +1,43 @@
 <RCC>
-    <qresource prefix="/">
-        <file>qml/main.qml</file>
-        <file>qml/ListControls.qml</file>
-        <file>qml/ControlLed.qml</file>
-        <file>qml/MenuBar.qml</file>
-        <file>qml/CategoryList.qml</file>
+    <qresource prefix="/qml">
+        <file alias="main.qml">qml/main.qml</file>
+        <file alias="ListControls.qml">qml/ListControls.qml</file>
+        <file alias="ControlLed.qml">qml/ControlLed.qml</file>
+        <file alias="MenuBar.qml">qml/MenuBar.qml</file>
+        <file alias="CategoryList.qml">qml/CategoryList.qml</file>
+        <file alias="ViewLogin.qml">qml/ViewLogin.qml</file>
+        <file alias="ViewSettings.qml">qml/ViewSettings.qml</file>
+        <file alias="ViewDevices.qml">qml/ViewDevices.qml</file>
+        <file alias="Button.qml">qml/Button.qml</file>
+        <file>qml/InputBox.qml</file>
+        <file alias="ControlTemp.qml">qml/ControlTemp.qml</file>
+        <file alias="ViewRules.qml">qml/ViewRules.qml</file>
+        <file alias="TitleBar.qml">qml/TitleBar.qml</file>
+        <file alias="BarButton.qml">qml/BarButton.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="color/light_off.png">images/color/light_off.png</file>
+        <file alias="color/light_on.png">images/color/light_on.png</file>
+        <file alias="color/menu.png">images/color/menu.png</file>
+        <file alias="color/settings.png">images/color/settings.png</file>
+        <file alias="color/puzzle.png">images/color/puzzle.png</file>
+        <file alias="color/blind_down.png">images/color/blind_down.png</file>
+        <file alias="color/blind_up.png">images/color/blind_up.png</file>
+        <file alias="color/closed_window.png">images/color/closed_window.png</file>
+        <file alias="color/fan.png">images/color/fan.png</file>
+        <file alias="color/microvawe.png">images/color/microvawe.png</file>
+        <file alias="color/open_window.png">images/color/open_window.png</file>
+        <file alias="color/power_off.png">images/color/power_off.png</file>
+        <file alias="color/power_on.png">images/color/power_on.png</file>
+        <file alias="color/tv_off.png">images/color/tv_off.png</file>
+        <file alias="color/tv_on.png">images/color/tv_on.png</file>
+        <file alias="color/wall_socket.png">images/color/wall_socket.png</file>
+        <file alias="color/wall_socket_with_plug.png">images/color/wall_socket_with_plug.png</file>
+        <file alias="color/thermometer.png">images/color/thermometer.png</file>
+        <file alias="color/cancel.png">images/color/cancel.png</file>
+        <file alias="color/checked.png">images/color/checked.png</file>
+        <file alias="color/delete.png">images/color/delete.png</file>
+        <file alias="color/edit.png">images/color/edit.png</file>
+        <file alias="color/back.png">images/color/back.png</file>
     </qresource>
 </RCC>

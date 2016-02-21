@@ -16,6 +16,7 @@ void DeviceMan::addDevice(int id, QString name, QString type, QString state, int
     deviceMap.insert(id, dev);
     if(!currentCat || cid == currentCat){
         deviceList.append(dev);
+        emit listChanged(deviceList);
     }
 }
 
@@ -35,14 +36,21 @@ void DeviceMan::selectCat(int cid)
     updateList();
 }
 
+void DeviceMan::setDeviceState(int id, QString stat)
+{
+    DeviceItem *dev = deviceMap.value(id);
+    dev->setState(stat);
+}
+
 void DeviceMan::updateList()
 {
     deviceList.clear();
     foreach (DeviceItem *dev, deviceMap) {
-        if(!currentCat || dev->id() == currentCat){
+        if(!currentCat || dev->cid() == currentCat){
             deviceList.append(dev);
         }
     }
+    emit listChanged(deviceList);
 }
 
 

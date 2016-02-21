@@ -16,11 +16,13 @@ public:
     const QList<QObject *> getList();
 
 signals:
+    void listChanged(QList<QObject*> list);
 
 public slots:
     void addDevice(int id, QString name, QString type, QString state, int cid);
     void setDeviceList(BoxListDev list);
     void selectCat(int cid);
+    void setDeviceState(int id, QString stat);
 
 private:
     int currentCat = 0;

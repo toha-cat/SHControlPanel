@@ -3,7 +3,9 @@ import QtQuick 2.5
 Rectangle{
     property var barHeight: 42*dp
     property var title: "Main"
+    signal back
 
+    id: titleBar
     height: barHeight
     width: parent.width
     anchors.top: parent
@@ -19,11 +21,11 @@ Rectangle{
     }
 
     BarButton{
-        id: btnCategory
+        id: btnBack
         anchors.left: parent.left
-        ico: "qrc:/images/color/menu.png"
+        ico: "qrc:/images/color/back.png"
         onClick: {
-            viewListCategoryDev.show();
+            titleBar.back();
         }
     }
 
@@ -32,28 +34,10 @@ Rectangle{
         text: title
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.left: btnCategory.right
-        anchors.right: btnRules.left
+        anchors.left: btnBack.right
+        anchors.right: parent.right
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         renderType: Text.NativeRendering
-    }
-
-    BarButton{
-        id: btnRules
-        anchors.right: btnSetting.left
-        ico: "qrc:/images/color/puzzle.png"
-        onClick: {
-            window.showRules();
-        }
-    }
-
-    BarButton{
-        id: btnSetting
-        anchors.right: parent.right
-        ico: "qrc:/images/color/settings.png"
-        onClick: {
-            window.showSettings();
-        }
     }
 }

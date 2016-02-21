@@ -1,5 +1,6 @@
 QT += qml quick
 
+
 TEMPLATE = app
 
 TARGET = SHPanel
@@ -14,7 +15,9 @@ SOURCES += main.cpp \
     app.cpp \
     uibackend.cpp \
     categoryitem.cpp \
-    categoryman.cpp
+    categoryman.cpp \
+    ruleman.cpp \
+    ruleitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,5 +37,9 @@ HEADERS += \
     uibackend.h \
     protocol.h \
     categoryitem.h \
-    categoryman.h
+    categoryman.h \
+    ruleman.h \
+    ruleitem.h
+
+DISTFILES +=
 

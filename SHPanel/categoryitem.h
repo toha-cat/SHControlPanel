@@ -13,6 +13,7 @@ class CategoryItem : public QObject
 
 public:
     explicit CategoryItem(BoxCategory bcat, QObject *parent = 0);
+    explicit CategoryItem(int cid, QString name, QObject *parent = 0);
     int cid() const;
     QString name() const;
 

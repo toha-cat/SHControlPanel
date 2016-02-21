@@ -144,7 +144,7 @@ void ComTranslator::readDev(int id)
 	emit sendMess(out);
 }
 
-void ComTranslator::writeDev(int id, int state)
+void ComTranslator::writeDev(int id, QString state)
 {
 	BoxDev dev;
 	dev.id = id;

@@ -39,7 +39,7 @@ public slots:
 	void translateMess(QByteArray mess);
 
 	void readDev(int id);
-	void writeDev(int id, int state);
+    void writeDev(int id, QString state);
 	void addDev(int cid, QString name, QString type, QString param);
 	void getDevList(int cid);
 	void getRuleList(int cid);

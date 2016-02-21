@@ -9,22 +9,31 @@
 #include <QQmlContext>
 #include "deviceitem.h"
 
+#ifdef Q_OS_ANDROID
+#include <QAndroidJniObject>
+#endif
+
 class UiBackend : public QObject
 {
 	Q_OBJECT
 public:
 	explicit UiBackend(QObject *parent = 0);
 	void createUi();
-    void setDeviceModel(QList<QObject *> list);
-    void setDeviceCatModel(QList<QObject *> list);
     void show();
+
 signals:
+    void selectCat(int cid);
+    void changeDevice(int id, QString stat);
+    void changeRuleState(int id, int stat);
 
 public slots:
-	void selectCat(int cid);
+    void setDeviceModel(QList<QObject *> list);
+    void setDeviceCatModel(QList<QObject *> list);
+    void setRulesModel(QList<QObject *> list);
+    void showLoginForm();
 
 protected:
-	void regMetrics();
+    void regMetrics();
 
 	QObject *viewer;
 	QQmlApplicationEngine engine;
