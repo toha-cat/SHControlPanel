@@ -1,4 +1,5 @@
 import QtQuick 2.5
+
 Rectangle{
     color: "#4D90FE"
 
@@ -7,7 +8,7 @@ Rectangle{
         anchors.fill: parent
         anchors.leftMargin: parent.width * 0.1
         anchors.rightMargin: parent.width * 0.1
-        color: "#4D90FE"
+        color: parent.color
 
         Text
         {
@@ -18,7 +19,7 @@ Rectangle{
             anchors.top: parent.top
             anchors.topMargin: 40*dp
             font.pixelSize: 16*dp
-            text: 'Логин'
+            text: 'Логін'
         }
         Rectangle
         {
@@ -65,6 +66,7 @@ Rectangle{
                 anchors.fill: parent
                 anchors.margins: 10*dp
                 font.pixelSize: 18*dp
+                echoMode: TextInput.Password
             }
         }
         Text
@@ -76,7 +78,7 @@ Rectangle{
             anchors.top: passwordInputBox.bottom
             anchors.topMargin: 20*dp
             font.pixelSize: 16*dp
-            text: 'Адрес сервера'
+            text: 'Адреса серверу'
         }
         Rectangle
         {
@@ -104,10 +106,16 @@ Rectangle{
             anchors.top: serverInputBox.bottom
             anchors.topMargin: 30*dp
             height: 40*dp
-            btnText: "Вход"
+            btnText: "Підключитись"
             onClicked:
             {
-                console.log("clicked") // вывод отладочной информации
+                if(loginInput.text == 'aliona' && passwordInput.text == '1'){
+                    window.hideMessage();
+                    window.showDevicePage();
+                }
+                else{
+                    window.showMessage("Помилка авторизації")
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 import QtQuick 2.5
 
 Item {
+    //property var isCurrent: (currentIndex == model.index)
 
     function getAlteredState(){
         if(model.state == "on"){
@@ -13,10 +14,10 @@ Item {
 
     function getStateImages(){
         if(model.state == "on"){
-            return "qrc:/images/color/light_on.png";
+            return "qrc:/images/color/wall_socket_with_plug.png";
         }
         else{
-            return "qrc:/images/color/light_off.png";
+            return "qrc:/images/color/wall_socket.png";
         }
     }
 

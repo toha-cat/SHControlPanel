@@ -20,7 +20,7 @@ ListView {
             Text {
                 anchors.centerIn: parent
                 renderType: Text.NativeRendering
-                text: "Все устройства"
+                text: "Всі пристрої"
             }
 
             MouseArea {
@@ -28,7 +28,7 @@ ListView {
                 onClicked: {
                     viewListCategoryDev.hidden();
                     backend.selectCat(0);
-                    mainMenuBar.title = "Все устройства";
+                    mainMenuBar.title = "Всі пристрої";
                 }
             }
         }
@@ -36,7 +36,7 @@ ListView {
 
     delegate: Item {
 
-        height: 10*mm
+        height: 42*dp
         width: parent.width
 
         Rectangle {
